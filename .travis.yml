@@ -1,6 +1,5 @@
 # sudo: required
-language:
-  - generic
+language: generic
 
 services:
   - docker
@@ -10,3 +9,16 @@ before_install:
 
 script:
   - docker run -e CI=true elvenvdk/frontend npm run test -- --coverage
+
+deploy:
+  provider: elasticbeanstalk
+  region: 'us-east-1'
+  app: 'docker-react'
+  env: 'ReactDocker-env'
+  bucket_name: 'elasticbeanstalk-us-east-1-652459133137'
+  bucket_path: 'docker-react'
+  on:
+    branch: master
+  access_key_id: $AWS_ACCESS_KEY
+  secret_access_key:
+    secure: '$AWS_SECRET_KEY'
