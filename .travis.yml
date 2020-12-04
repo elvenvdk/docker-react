@@ -11,6 +11,7 @@ script:
   - docker run -e CI=true elvenvdk/frontend npm run test -- --coverage
 
 deploy:
+  edge: true
   provider: elasticbeanstalk
   region: 'us-east-1'
   app: 'docker-react'
